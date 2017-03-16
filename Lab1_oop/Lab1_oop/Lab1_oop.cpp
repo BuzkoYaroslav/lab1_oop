@@ -14,8 +14,6 @@ const char *triangleType3 = "Type3";
 
 const int anglesCount = 3;
 
-const double PI = 3.14;
-
 void writeInfo(Triangle *triangle, ostream *stream);
 const char* triangleTextType(Triangle *triangle);
 char* anglesString(Triangle *triangle);
@@ -88,7 +86,7 @@ void writeInfo(Triangle *triangle, ostream *stream) {
 
 	*stream << "Side 1 = " << triangle->side1 << endl;
 	*stream << "Side 2 = " << triangle->side2 << endl;
-	*stream << "Angle in degrees = " << triangle->angle / PI * 180 << endl;
+	*stream << "Angle in degrees = " << Triangle::radiansToDegrees(triangle->angle) << endl;
 }
 
 const char* triangleTextType(Triangle *triangle) {
@@ -141,7 +139,7 @@ Triangle** readTrianglesFromConsole(int num) {
 		cout << "Input angle (degrees) between them: ";
 		cin >> angle;
 
-		result[i] = new Triangle(angle * PI / 180, side1, side2);
+		result[i] = new Triangle(angle, side1, side2);
 	}
 
 	return result;

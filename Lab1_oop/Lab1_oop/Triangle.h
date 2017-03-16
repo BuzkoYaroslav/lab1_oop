@@ -3,13 +3,17 @@
 class Triangle
 {
 private:
-	const double epsilan = 0.001;
+	const double epsilan = 0.01;
+	const double defaultAngle = 30;
 	const double PI = 3.14;
 
 	double calculateThirdSide();
 	double calculateBigRadius();
 	double calculateSmallRadius();
 public:
+	static double degreesToRadians(int degrees);
+	static int radiansToDegrees(double radians);
+
 	double angle;
 	double side1, side2;
 
@@ -22,6 +26,6 @@ public:
 	int* getAngles();
 	double calculateLengthBetweenCenters();
 
-	Triangle(double angle, double side1, double side2);
+	Triangle(int angle, double side1, double side2);
 };
 
