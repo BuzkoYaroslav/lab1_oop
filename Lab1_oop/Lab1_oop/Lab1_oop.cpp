@@ -5,6 +5,7 @@
 #include "Triangle.h"
 #include <iomanip>
 #include <iostream>
+
 using namespace std;
 
 const char *triangleType1 = "Type1";
@@ -41,16 +42,16 @@ int main()
 			continue;
 		}
 
-		char *command = new char[256]{ NULL };
-		cout << "Input command:" << endl
-			<< "M - maximizing angle" << endl
-			<< "T - determine type" << endl
-			<< "D - distance between centers" << endl
-			<< "A - determine angles" << endl
-			<< "I - info about triangle" << endl;
-		cin.getline(command, 255);
+		char *comand = new char[256]{ NULL };
+		cout << "Input command: "
+			<< "M - maximizing angle "
+			<< "T - determine type "
+			<< "D - distance between centers "
+			<< "A - determine angles "
+			<< "I - info about triangle\n";
+		cin >> comand;
 		
-		if (strcmp(command, "M") == 0) {
+		if (strcmp(comand, "M") == 0) {
 			int percent = 0;
 			
 			cout << "Input desired percentage: ";
@@ -58,32 +59,32 @@ int main()
 
 			triangles[index]->increaseAngle(percent);
 		} 
-		else if (strcmp(command, "T") == 0) {
+		else if (strcmp(comand, "T") == 0) {
 			cout << triangleTextType(triangles[index]) << endl;
 		} 
-		else if (strcmp(command, "D") == 0) {
+		else if (strcmp(comand, "D") == 0) {
 			cout << "Distance between centers = "
 				<< fixed << setprecision(3)
 				<< triangles[index]->calculateLengthBetweenCenters() << endl;
 		} 
-		else if (strcmp(command, "A") == 0) {
-			cout << anglesString(triangles[index]);
+		else if (strcmp(comand, "A") == 0) {
+			cout << anglesString(triangles[index]) << endl;
 		}
-		else if (strcmp(command, "I") == 0) {
+		else if (strcmp(comand, "I") == 0) {
 			writeInfo(triangles[index], &cout);
 		}
 		else {
 			cout << "Incorrect command!";
 		}
 
-		delete command;
+		delete comand;
 	}
 
 	return 0;
 }
 
 void writeInfo(Triangle *triangle, ostream *stream) {
-	*stream << "Info about triangle";
+	*stream << "Info about triangle\n";
 
 	*stream << "Side 1 = " << triangle->side1 << endl;
 	*stream << "Side 2 = " << triangle->side2 << endl;
@@ -109,10 +110,15 @@ char* anglesString(Triangle *triangle) {
 	char *str = new char[256]{ NULL };
 
 	for (int i = 0; i < anglesCount; i++) {
+		char *strAngle = new char[3]{ NULL };
+
+		itoa(angles[i], strAngle, 10);
+
 		strcat(str, "angle = ");
-		strcat(str, itoa(i, NULL, 10));
-		strcat(str, itoa(angles[i], NULL, 10));
-		strcat(str, "degrees ");
+		strcat(str, strAngle);
+		strcat(str, " degrees, ");
+
+		delete strAngle;
 	}
 	
 	return str;
